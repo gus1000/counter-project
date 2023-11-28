@@ -1,0 +1,90 @@
+const body = document.querySelector("body");
+
+const counter = document.querySelector(".counter");
+const minusButton = document.querySelector(".minus-button");
+const plusButton = document.querySelector(".plus-button");
+const saveButton = document.querySelector(".save-button");
+const resetButton = document.querySelector(".reset-button");
+let resultsCounter = document.querySelector(".result-counter");
+let previousCounter = document.querySelector(".previous-result");
+
+// setting the initial background color to blue. 
+    body.style.backgroundColor = "blue";
+
+let count = 0;
+let result = " ";
+let previousResult = " ";
+
+counter.innerText = 0;
+previousCounter.innerText = "";
+
+function addOne() {
+  ++count;
+  counter.innerText = count;
+}
+
+function minusOne() {
+  --count;
+  counter.innerText = count;
+}
+
+function previousCount() {
+  previousResult = result;
+  previousCounter.innerText = previousResult;
+}
+
+
+
+minusButton.addEventListener("click", function () {
+  minusOne();
+  if (count < 0) {
+    body.style.backgroundColor = "red";
+  }
+  if (count >= 1 && count <= 5) {
+    body.style.backgroundColor = "green";
+  }
+  if (count === 0) {
+    body.style.backgroundColor = "blue";
+  }
+
+  if (count > 5) {
+    body.style.backgroundColor = "yellow";
+  }
+});
+plusButton.addEventListener("click", function () {
+  addOne();
+
+  if (count < 0) {
+    body.style.backgroundColor = "red";
+  }
+  if (count >= 1 && count <= 5) {
+    body.style.backgroundColor = "green";
+  }
+  if (count === 0) {
+    body.style.backgroundColor = "blue";
+  }
+
+  if (count > 5) {
+    body.style.backgroundColor = "yellow";
+  }
+});
+// x < 0. red
+// 1 < x < 5 : green
+// x === 0: blue
+
+// save feature: we save our currently saved count:
+
+saveButton.addEventListener("click", function () {
+  previousCount(); // this is the previously saved count
+  result = count;
+
+  resultsCounter.innerText = result;
+});
+
+resetButton.addEventListener("click", function () {
+  count =  "";
+  result =  "";
+  resultsCounter.innerText = " ";
+
+  previousCounter.innerText = " ";
+});
