@@ -1,0 +1,51 @@
+.button, h5{
+  paddding: 0;
+  margin: 0;
+}
+
+.container {
+  padding-top: 250px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+ 
+}
+
+.counter-container {
+  width: 80px;
+  justify-content: center;
+ 
+  background: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.minus-button {
+    background: pink;
+  color: red;
+
+}
+
+.counter{
+  font-size: 15px;
+}
+
+.plus-button {
+  background: lightgreen;
+  color: green;
+}
+
+.buttons-container {
+  display:flex;
+  gap: 5px;
+ 
+}
+
+.save-button {
+}
+  
+ 
+
