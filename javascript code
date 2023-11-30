@@ -1,22 +1,20 @@
 const body = document.querySelector("body");
 
-const counter = document.querySelector(".counter");
+let counter = document.querySelector(".counter");
 const minusButton = document.querySelector(".minus-button");
 const plusButton = document.querySelector(".plus-button");
 const saveButton = document.querySelector(".save-button");
 const resetButton = document.querySelector(".reset-button");
-let resultsCounter = document.querySelector(".result-counter");
-let previousCounter = document.querySelector(".previous-result");
+let results = document.querySelector(".results");
+let doubleClicked = 0;
+let previousCounter, currentCounter;
 
-// setting the initial background color to blue. 
-    body.style.backgroundColor = "blue";
+// setting the initial background color to blue.
+body.style.backgroundColor = "blue";
 
 let count = 0;
-let result = " ";
-let previousResult = " ";
 
 counter.innerText = 0;
-previousCounter.innerText = "";
 
 function addOne() {
   ++count;
@@ -28,46 +26,27 @@ function minusOne() {
   counter.innerText = count;
 }
 
-function previousCount() {
-  previousResult = result;
-  previousCounter.innerText = previousResult;
+function changeBackground(count) {
+  if (count < 0) {
+    body.style.backgroundColor = "red";
+  } else if (count >= 1 && count <= 5) {
+    body.style.backgroundColor = "green";
+  } else if (count === 0) {
+    body.style.backgroundColor = "blue";
+  } else {
+    body.style.backgroundColor = "yellow";
+  }
 }
-
-
 
 minusButton.addEventListener("click", function () {
   minusOne();
-  if (count < 0) {
-    body.style.backgroundColor = "red";
-  }
-  if (count >= 1 && count <= 5) {
-    body.style.backgroundColor = "green";
-  }
-  if (count === 0) {
-    body.style.backgroundColor = "blue";
-  }
-
-  if (count > 5) {
-    body.style.backgroundColor = "yellow";
-  }
+  changeBackground(count);
 });
 plusButton.addEventListener("click", function () {
   addOne();
-
-  if (count < 0) {
-    body.style.backgroundColor = "red";
-  }
-  if (count >= 1 && count <= 5) {
-    body.style.backgroundColor = "green";
-  }
-  if (count === 0) {
-    body.style.backgroundColor = "blue";
-  }
-
-  if (count > 5) {
-    body.style.backgroundColor = "yellow";
-  }
+  changeBackground(count);
 });
+
 // x < 0. red
 // 1 < x < 5 : green
 // x === 0: blue
@@ -75,16 +54,25 @@ plusButton.addEventListener("click", function () {
 // save feature: we save our currently saved count:
 
 saveButton.addEventListener("click", function () {
-  previousCount(); // this is the previously saved count
-  result = count;
+  if (doubleClicked === 0) {
+    let previousCounter = document.createElement("span");
+    const firstResult = results.appendChild(previousCounter);
+    doubleClicked++;
+    firstResult.innerText = count + " ";
+  } else {
+    let currentCounter = document.createElement("span");
+    const secondResult = results.appendChild(currentCounter);
+    secondResult.innerText = "," + count;
 
-  resultsCounter.innerText = result;
+    doubleClicked++;
+  }
 });
 
 resetButton.addEventListener("click", function () {
-  count =  "";
-  result =  "";
-  resultsCounter.innerText = " ";
+  count = 0;
 
-  previousCounter.innerText = " ";
+  counter.textContent = count;
+  doubleClicked = 0;
+  results.innerHTML = ` `;
+  results.innerText = `Results:`;
 });
